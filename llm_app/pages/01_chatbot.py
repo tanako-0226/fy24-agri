@@ -83,8 +83,10 @@ if prompt := st.chat_input("質問してください"):
     for i in range(retreval_num):
             source  = df.loc[I[0][i]]
             ans = source.answer
+            question = source.question
+            print(question)
             messages.append({'role': 'user', 'content': f'出典{i}:{ans}\n'})
-            source_question_list.append(f"出典：{source.question}")
+            source_question_list.append(f"出典：{question}")
 
     # st.dataframe(df.loc[I[0]])
     
