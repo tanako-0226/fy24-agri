@@ -11,7 +11,6 @@ AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
 EMBEDDING_DEPLOY_NAME = os.getenv("EMBEDDING_DEPLOY_NAME")
 GPT35TURBO_DEPLOY_NAME = os.getenv("GPT35TURBO_DEPLOY_NAME")
 
-print("DEPLY_NAME", GPT35TURBO_DEPLOY_NAME)
 
 client = AzureOpenAI(
     api_key=AZURE_API_KEY,  
@@ -79,11 +78,13 @@ if prompt := st.chat_input("質問してください"):
     それでは落ち着いて回答してください。
     """
     messages = [{"role": "system", "content": system_prompt}]  + st.session_state.messages[1:]
+    source_question_list = []
 
     for i in range(retreval_num):
             source  = df.loc[I[0][i]]
             ans = source.answer
-            messages.append({'role': 'user', 'content': f'情報1:{ans}\n'})
+            messages.append({'role': 'user', 'content': f'出典{i}:{ans}\n'})
+            source_question_list.append(f"出典：{source.question}")
 
     # st.dataframe(df.loc[I[0]])
     
@@ -94,4 +95,5 @@ if prompt := st.chat_input("質問してください"):
                                                     stream=True)
 
     response = st.chat_message("assistant").write_stream(stream)
+    response += "\n".join(source_question_list)
     st.session_state.messages.append({"role": "assistant", "content": response})

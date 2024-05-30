@@ -1,3 +1,3 @@
 import streamlit as st
 
-st.title("チーム；アグリの総合演習ページ")
+st.title("チームアグリの総合演習ページ")
