@@ -86,7 +86,7 @@ if prompt := st.chat_input("質問してください"):
             question = source.question
             print(question)
             messages.append({'role': 'user', 'content': f'出典{i}:{ans}\n'})
-            source_question_list.append(f"出典：{question}")
+            source_question_list.append(f"出典{i}：{question}")
 
     # st.dataframe(df.loc[I[0]])
     
