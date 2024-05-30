@@ -89,6 +89,7 @@ if prompt := st.chat_input("質問してください"):
             source_question_list.append(f"出典：{question}")
 
     # st.dataframe(df.loc[I[0]])
+    st.text("\n".join(source_question_list))
     
     stream = client.chat.completions.create(model="gpt-4o", 
                                                     temperature=0.3,
