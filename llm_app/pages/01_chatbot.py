@@ -95,6 +95,8 @@ if prompt := st.chat_input("質問してください"):
                                                     max_tokens=3000,
                                                     messages=messages,
                                                     stream=True)
+    
+    stream += "\n".join(source_question_list)
 
     response = st.chat_message("assistant").write_stream(stream)
     # response += "\n".join(source_question_list)
