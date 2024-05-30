@@ -89,7 +89,6 @@ if prompt := st.chat_input("質問してください"):
             source_question_list.append(f"出典：{question}")
 
     # st.dataframe(df.loc[I[0]])
-    st.text("\n".join(source_question_list))
     
     stream = client.chat.completions.create(model="gpt-4o", 
                                                     temperature=0.3,
@@ -98,7 +97,7 @@ if prompt := st.chat_input("質問してください"):
                                                     stream=True)
 
     response = st.chat_message("assistant").write_stream(stream)
-    response += "\n".join(source_question_list)
+    # response += "\n".join(source_question_list)
     st.session_state.messages.append({"role": "assistant", "content": response})
 
-    st.session_state.messages.append({"role": "assistant", "content": "\n".join(source_question_list)})
+    st.text("\n".join(source_question_list))
