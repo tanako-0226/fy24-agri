@@ -1,4 +1,12 @@
 streamlit
+openai
+pandas
+faiss-cpu
+numpy
+matplotlib
+datasets
+langchain-openai
 numpy
 pandas
-matplotlib
+ragas
+plotly
