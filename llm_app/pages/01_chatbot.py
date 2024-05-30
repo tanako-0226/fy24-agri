@@ -100,3 +100,5 @@ if prompt := st.chat_input("質問してください"):
     response = st.chat_message("assistant").write_stream(stream)
     response += "\n".join(source_question_list)
     st.session_state.messages.append({"role": "assistant", "content": response})
+
+    st.session_state.messages.append({"role": "assistant", "content": "\n".join(source_question_list)})
