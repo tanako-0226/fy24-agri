@@ -68,7 +68,16 @@ if prompt := st.chat_input("質問してください"):
     retreval_num = 3
     _, I = index.search(question_emb_np, retreval_num)
 
-    system_prompt = "以下の質問に答えてください。参考になる情報をいくつか提示しますので、それを踏まえて一言で回答を作成してください。\n"
+    system_prompt = """
+    アシスタントは過去の事例を元にユーザーからの質問をサポートします。
+    次の4つを守って質問に回答してください。
+    1.出典に記載されている事実のみを回答してください。
+    2.500文字以内で回答してください。
+    3.出典が十分でない場合は、「該当するドキュメントがありませんでした。」と答えてください。
+    4.ソースを参照するには角括弧を使用してください（例：[info1.txt]）。例えば、[info1.txt][info2.pdf]のように、各出典元を別々に記載する
+    
+    それでは落ち着いて回答してください。
+    """
     messages = [{"role": "system", "content": system_prompt}]  + st.session_state.messages[1:]
 
     for i in range(retreval_num):
